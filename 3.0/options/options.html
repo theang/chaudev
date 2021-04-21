@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="options.css"/>
+    <script src="options.js"></script>
+  </head>
+
+  <body>
+    <div class="panel" id="panel">
+      <button type="button" class="button" id="show_names" name="show_names" value="show_names">Show Device Names (will ask for microphone access)</button>
+      <form id="chdev">
+        <label>Change Output Device to:</label>
+        <div>
+          <input type="radio" id="default" name="dev" value="0" />
+          <label for="default">Default</label>
+        </div>
+      </form>
+    </div>
+    <div class="hidden">
+      <audio id="audioTest"></audio>
+    </div>
+    <div class="hidden" id="help">
+      <div id="left">
+        <img src="warning.png"/>
+      </div>
+      <div id="right">
+        Please set <mark>media.setsinkid.enabled</mark> option to true in the Firefox Configuration, to do that:
+        <ul>
+          <li>Open 'about:config': type <mark>'about:config'</mark> in the address field. And press 'Enter'</li>
+          <li>Click <mark>'I accept the risk!'</mark> button to proceeed. </li>
+          <li>Type or copy 'media.setsinkid.enabled' to the search field at the top. </li>
+          <li>Double click <mark>'media.setsinkid.enabled'</mark> to change its value to 'true'. Alternatively right-click and select the Toggle command.</li>
+          <li>Value of the 'media.setsinkid.enabled' parameter should be displayed as true</li>
+        </ul>
+        Link to more detailed document on <a href=https://support.mozilla.org/en-US/kb/about-config-editor-firefox>how to access Configuration Editor is here</a>.
+      </div>
+    </div>
+  </body>
+</html>
