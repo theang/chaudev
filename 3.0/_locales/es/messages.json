@@ -1,0 +1,44 @@
+{
+  "extensionName": {
+    "message": "chaudev"
+  },
+  "extensionDesc": {
+    "message": "Cambiar el dispositivo de salida de audio"
+  },
+  "popupTitle": {
+    "message": "Cambiar el dispositivo de salida de audio"
+  },
+  "optionsGenericAudioDevice" : {
+    "message": "Dispositivo de salida de audio"
+  },
+  "optionsShowDeviceNames" : {
+    "message": "Presione para mostrar los nombres de los dispositivos de salida de audio (solicitará acceso al micrófono)"
+  },
+  "optionsChangeOutputDeviceTo" : {
+    "message": "El dispositivo de salida:"
+  },
+  "optionsDefault" : {
+    "message": "Dispositivo por defecto"
+  },
+  "optionsHelpListHeader" : {
+    "message": "Establezca la opción <mark>media.setsinkid.enabled</mark> en 'true' en la configuración de Firefox"
+  },
+  "optionsHelpListStep1": {
+    "message" : "En la barra de direcciones, escribe 'about:config' y pulsa Enter."
+  },
+  "optionsHelpListStep2" : {
+    "message":"Puede aparecer una página de advertencia. Para continuar, haz clic en '¡Acepto los riesgos!'."
+  },
+  "optionsHelpListStep3": {
+    "message":"Escriba 'media.setsinkid.enabled' en el campo de búsqueda en la parte superior de la página 'about:config'."
+  },
+  "optionsHelpListStep4" : {
+    "message": "Haz clic con el botón derecho sobre la preferencia 'media.setsinkid.enabled' y selecciona Cambiar desde el menú contextual (o haz doble clic sobre la preferencia) para cambiar su valor a 'true'"
+  },
+  "optionsHelpListStep5": {
+    "message": "Valor de la preferencia 'media.setsinkid.enabled' apareces 'true'"
+  },
+  "optionsHelpLinkToDoc": {
+    "message": "Enlace a un documento más detallado sobre: <a href='https://support.mozilla.org/es/kb/about-config-editor-firefox'>Editor de Configuración para Firefox</a>."
+  }
+}

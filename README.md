@@ -11,3 +11,10 @@ After that under the addon icon or in add-on options page it will be possible to
 
 Initially devices are named: Audio Output Device X
 However clicking on the 'Show Device Names' button and allowing addon to use Mic will show real device names, that is firefox limitation.
+
+## Changes
+
+### 3.01
+
+1. Internationalization: de,es,fr,ru languages added.
+2. Minimum firefox version set to 64, because setSinkId doesn't work on the previous versions

@@ -1,0 +1,44 @@
+{
+  "extensionName": {
+    "message": "chaudev"
+  },
+  "extensionDesc": {
+    "message": "Изменить устройство вывода звука"
+  },
+  "popupTitle": {
+    "message": "Изменить устройство вывода звука"
+  },
+  "optionsGenericAudioDevice" : {
+    "message": "Устройство вывода звука"
+  },
+  "optionsShowDeviceNames" : {
+    "message": "Показать имена устройств (потребуется доступ к микрофону)"
+  },
+  "optionsChangeOutputDeviceTo" : {
+    "message": "Поменять устройство на:"
+  },
+  "optionsDefault" : {
+    "message": "По умолчанию"
+  },
+  "optionsHelpListHeader" : {
+    "message": "Пожалуйста установите опцию <mark>media.setsinkid.enabled</mark> в значение true в конфигурации Firefox Configuration. Чтобы сделать это:"
+  },
+  "optionsHelpListStep1": {
+    "message" : "Откройте 'about:config': введите <mark>'about:config'</mark> в адресной строке и нажмите 'Enter'"
+  },
+  "optionsHelpListStep2" : {
+    "message":"Щёлкните по <mark>'Я принимаю на себя риск!'</mark>, чтобы перейти на страницу about:config. "
+  },
+  "optionsHelpListStep3": {
+    "message":"Введите в поле Поиска 'media.setsinkid.enabled'. Параметр 'media.setsinkid.enabled' будет отобран. "
+  },
+  "optionsHelpListStep4" : {
+    "message": "Щёлкните правой кнопкой мыши на параметре <mark>'media.setsinkid.enabled'</mark> и выберите в контекстном меню Переключить (или дважды щёлкните по параметру 'media.setsinkid.enabled')."
+  },
+  "optionsHelpListStep5": {
+    "message": "Значение параметра 'media.setsinkid.enabled' должно отображаться как true"
+  },
+  "optionsHelpLinkToDoc": {
+    "message": "Более подробно о Редакторе Конфигурации можно узнать по ссылке: <a href='https://support.mozilla.org/ru/kb/about-config-editor-firefox'>Редактор настроек Firefox</a>."
+  }
+}

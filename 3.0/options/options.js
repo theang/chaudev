@@ -7,6 +7,7 @@ if ("undefined" === typeof(chaudev)) {
     filename: "options.js: ",
     deviceNames: [],
     debug:true,
+    AUDIO_DEVICE: browser.i18n.getMessage("optionsGenericAudioDevice"),
 
     log: function(str, obj) {
       if (chaudev.debug) {
@@ -149,7 +150,7 @@ if ("undefined" === typeof(chaudev)) {
         if (type.match(/audio/i) && direction.match(/output/i)) {
           let lbl = device.label;
           if (lbl == '') {
-            lbl = "Audio Output Device " + current;
+            lbl = chaudev.AUDIO_DEVICE + " " + current;
           } else {
             names.push(device.label);
           }
@@ -208,8 +209,38 @@ if ("undefined" === typeof(chaudev)) {
       });
     },
 
+    localize: function() {
+      const toLocalize = document.querySelectorAll("[data-localize]");
+      chaudev.log("Current locale: " + browser.i18n.getUILanguage());
+      const parser = new DOMParser();
+      for (let tag of toLocalize) {
+        chaudev.log("BEGIN: localizing: " + tag.nodeName);
+        let name = tag.getAttribute("data-localize");
+        let localizedMessage = browser.i18n.getMessage(name);
+        chaudev.log("BEGIN: localized: " + name + ": " + localizedMessage);
+        if (localizedMessage != name) {
+          if (localizedMessage.indexOf("<") != -1) {
+            const html = parser.parseFromString(localizedMessage, "text/html");
+            const body = html.getElementsByTagName("body")[0];
+            while (tag.firstChild) {
+              tag.removeChild(tag.lastChild);
+            }
+            tag.innerHTML = '';
+            const childNodes = Array.from(body.childNodes);
+            childNodes.forEach(function(cnode) {
+              chaudev.log("BEGIN: localizing, adding: " + cnode.nodeName);
+              tag.appendChild(cnode);
+            });
+          } else {
+            tag.textContent = localizedMessage;
+          }
+        }
+      }
+    },
+
     init: function() {
       chaudev.log("BEGIN: init " + document.URL);
+      chaudev.localize();
       let idx = document.URL.indexOf("#");
       let mode = ((idx != -1) ? document.URL.substring(idx+1) : "common");
       let audioTest = document.getElementById("audioTest");

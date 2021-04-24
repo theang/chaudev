@@ -1,0 +1,44 @@
+{
+  "extensionName": {
+    "message": "chaudev"
+  },
+  "extensionDesc": {
+    "message": "Set Audio Device"
+  },
+  "popupTitle": {
+    "message": "Change Audio Device"
+  },
+  "optionsGenericAudioDevice" : {
+    "message": "Audio Output Device"
+  },
+  "optionsShowDeviceNames" : {
+    "message": "Show Device Names (will ask for microphone access)"
+  },
+  "optionsChangeOutputDeviceTo" : {
+    "message": "Change Output Device to:"
+  },
+  "optionsDefault" : {
+    "message": "Default"
+  },
+  "optionsHelpListHeader" : {
+    "message": "Please set <mark>media.setsinkid.enabled</mark> option to true in the Firefox Configuration, to do that:"
+  },
+  "optionsHelpListStep1": {
+    "message" : "Open 'about:config': type <mark>'about:config'</mark> in the address field. And press 'Enter'"
+  },
+  "optionsHelpListStep2" : {
+    "message":"Click <mark>'I accept the risk!'</mark> button to proceed. "
+  },
+  "optionsHelpListStep3": {
+    "message":"Type or copy 'media.setsinkid.enabled' to the search field at the top. "
+  },
+  "optionsHelpListStep4" : {
+    "message": "Double click <mark>'media.setsinkid.enabled'</mark> to change its value to 'true'. Alternatively right-click and select the Toggle command."
+  },
+  "optionsHelpListStep5": {
+    "message": "Value of the 'media.setsinkid.enabled' parameter should be displayed as true"
+  },
+  "optionsHelpLinkToDoc": {
+    "message": "Link to more detailed document on <a href='https://support.mozilla.org/en-US/kb/about-config-editor-firefox'>how to access Configuration Editor is here</a>."
+  }
+}

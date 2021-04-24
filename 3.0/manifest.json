@@ -1,14 +1,17 @@
 {
 
   "manifest_version": 2,
-  "name": "chaudev",
-  "version": "3.0",
+  "name": "__MSG_extensionName__",
+  "version": "3.0.1",
 
-  "description": "Set Audio Device",
+  "description": "__MSG_extensionDesc__",
+
+  "default_locale": "en",
 
   "applications": {
   "gecko": {
-    "id": "chaudev@roamingquark.info"
+    "id": "chaudev@roamingquark.info",
+    "strict_min_version": "64.0"
     }
   },
 
@@ -33,7 +36,7 @@
 
   "browser_action": {
     "browser_style": true,
-    "default_title": "Change Audio Device",
+    "default_title": "__MSG_popupTitle__",
     "default_popup": "options/options.html#popup",
     "default_icon": {
       "16": "icons/chaudev16.png",

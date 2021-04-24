@@ -1,0 +1,44 @@
+{
+  "extensionName": {
+    "message": "chapeau"
+  },
+  "extensionDesc": {
+    "message": "Changer de périphérique de lecture audio"
+  },
+  "popupTitle": {
+    "message": "Changer de périphérique de lecture audio"
+  },
+  "optionsGenericAudioDevice" : {
+    "message": "Périphérique de lecture audio"
+  },
+  "optionsShowDeviceNames" : {
+    "message": "Appuyez pour afficher les noms des périphériques de lecture audio (demandera l'accès au microphone)"
+  },
+  "optionsChangeOutputDeviceTo" : {
+    "message": "Sélectionnez le nouveau périphérique de lecture à utiliser:"
+  },
+  "optionsDefault" : {
+    "message": "Le Périphérique Par Défaut"
+  },
+  "optionsHelpListHeader" : {
+    "message": "Veuillez définir l'option <mark>media.setsinkid.enabled</mark> sur true dans la configuration de Firefox:"
+  },
+  "optionsHelpListStep1": {
+    "message" : "Saisissez <mark>about:config</mark> dans la barre d’adresse de Firefox, puis appuyez sur 'Entrée'"
+  },
+  "optionsHelpListStep2" : {
+    "message":"Cliquez sur 'Je prends le risque' pour accéder à la page «about:config». "
+  },
+  "optionsHelpListStep3": {
+    "message":"Saisissez 'media.setsinkid.enabled' dans la zone de recherche. "
+  },
+  "optionsHelpListStep4" : {
+    "message": "Faites un clic droit sur la préférence <mark>'media.setsinkid.enabled'</mark> et choisissez Inverser dans le menu contextuel (ou faites un double-clic sur la préférence <mark>'media.setsinkid.enabled'</mark>)."
+  },
+  "optionsHelpListStep5": {
+    "message": "La valeur du paramètre 'media.setsinkid.enabled' doit être affichée comme 'true'"
+  },
+  "optionsHelpLinkToDoc": {
+    "message": "Vous pouvez en savoir plus sur l'éditeur de configuration sur la page: <a href='https://support.mozilla.org/fr/kb/about-config-editor-firefox'>Éditeur de configuration pour Firefox</a>."
+  }
+}

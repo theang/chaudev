@@ -9,12 +9,12 @@
 
   <body>
     <div class="panel" id="panel">
-      <button type="button" class="button" id="show_names" name="show_names" value="show_names">Show Device Names (will ask for microphone access)</button>
+      <button type="button" class="button" id="show_names" name="show_names" value="show_names" data-localize="optionsShowDeviceNames">Show Device Names (will ask for microphone access)</button>
       <form id="chdev">
-        <label>Change Output Device to:</label>
+        <label data-localize="optionsChangeOutputDeviceTo">Change Output Device to:</label>
         <div>
           <input type="radio" id="default" name="dev" value="0" />
-          <label for="default">Default</label>
+          <label for="default" data-localize="optionsDefault">Default</label>
         </div>
       </form>
     </div>
@@ -26,15 +26,15 @@
         <img src="warning.png"/>
       </div>
       <div id="right">
-        Please set <mark>media.setsinkid.enabled</mark> option to true in the Firefox Configuration, to do that:
+        <span data-localize="optionsHelpListHeader">Please set <mark>media.setsinkid.enabled</mark> option to true in the Firefox Configuration, to do that:</span>
         <ul>
-          <li>Open 'about:config': type <mark>'about:config'</mark> in the address field. And press 'Enter'</li>
-          <li>Click <mark>'I accept the risk!'</mark> button to proceeed. </li>
-          <li>Type or copy 'media.setsinkid.enabled' to the search field at the top. </li>
-          <li>Double click <mark>'media.setsinkid.enabled'</mark> to change its value to 'true'. Alternatively right-click and select the Toggle command.</li>
-          <li>Value of the 'media.setsinkid.enabled' parameter should be displayed as true</li>
+          <li data-localize="optionsHelpListStep1">Open 'about:config': type <mark>'about:config'</mark> in the address field. And press 'Enter'</li>
+          <li data-localize="optionsHelpListStep2">Click <mark>'I accept the risk!'</mark> button to proceeed. </li>
+          <li data-localize="optionsHelpListStep3">Type or copy 'media.setsinkid.enabled' to the search field at the top. </li>
+          <li data-localize="optionsHelpListStep4">Double click <mark>'media.setsinkid.enabled'</mark> to change its value to 'true'. Alternatively right-click and select the Toggle command.</li>
+          <li data-localize="optionsHelpListStep5">Value of the 'media.setsinkid.enabled' parameter should be displayed as true</li>
         </ul>
-        Link to more detailed document on <a href=https://support.mozilla.org/en-US/kb/about-config-editor-firefox>how to access Configuration Editor is here</a>.
+        <span data-localize="optionsHelpLinkToDoc">Link to more detailed document on <a href=https://support.mozilla.org/en-US/kb/about-config-editor-firefox>how to access Configuration Editor is here</a>.</span>
       </div>
     </div>
   </body>
