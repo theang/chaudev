@@ -1,5 +1,6 @@
 # chaudev
 Set Audio Device firefox plugin
+![Install at Firefox Browser Add-ons](https://addons.mozilla.org/firefox/addon/chaudev)
 
 ## Description
 Set Audio Device Extension allows to change output device for HTML5 audio/video tags to the device other than default one. Extension requires media.setsinkid.enabled configuration option to be true
@@ -14,7 +15,7 @@ However clicking on the 'Show Device Names' button and allowing addon to use Mic
 
 ## Changes
 
-### 3.01
+### 3.0.1
 
 1. Internationalization: de,es,fr,ru languages added.
 2. Minimum firefox version set to 64, because setSinkId doesn't work on the previous versions
