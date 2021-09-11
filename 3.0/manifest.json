@@ -12,6 +12,7 @@
   "gecko": {
     "id": "chaudev@roamingquark.info",
     "strict_min_version": "64.0"
+    "strict_max_version": "90.0"
     }
   },
 
