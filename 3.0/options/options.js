@@ -175,6 +175,14 @@ if ("undefined" === typeof(chaudev)) {
         chaudev.log("BEGIN: updateDevices deviceMap", deviceMap);
         let changed = false;
         let namesAvailable = false;
+        if (chaudev.deviceNames.length > 0 && deviceMap.devices.length == 0) {
+          chaudev.deviceNames.forEach(function (name, index) {
+            deviceMap.devices.push({label: name,
+                                    val: index + 1,
+                                    isSelected: (index+1 == defaultId),
+                                    id: "dev" + (index + 1)});
+          });
+        }
         if (deviceMap.devices.length > 0) {
           if (deviceMap.names.length > 0) {
             browser.runtime.sendMessage({command:"setDeviceNames",
@@ -186,6 +194,8 @@ if ("undefined" === typeof(chaudev)) {
               deviceMap.devices[i].label=chaudev.deviceNames[i];
             }
             namesAvailable = true;
+          } else {
+            // redirect to options page here
           }
 
           if (namesAvailable) {
@@ -240,9 +250,11 @@ if ("undefined" === typeof(chaudev)) {
 
     init: function() {
       chaudev.log("BEGIN: init " + document.URL);
+      chaudev.log("BEGIN: platform ", browser.runtime.getPlatformInfo())
       chaudev.localize();
       let idx = document.URL.indexOf("#");
       let mode = ((idx != -1) ? document.URL.substring(idx+1) : "common");
+      chaudev.log("BEGIN: mode " + mode);
       let audioTest = document.getElementById("audioTest");
       if (typeof audioTest.setSinkId === "function") {
         document.querySelector("#default").addEventListener("change", chaudev.onChange);
@@ -264,6 +276,13 @@ if ("undefined" === typeof(chaudev)) {
         browser.runtime.sendMessage({command:"getDeviceNames" }).then((response) => {
           chaudev.log("BEGIN: deviceNames: ", response.deviceNames);
           chaudev.deviceNames = response.deviceNames;
+          chaudev.log("BEGIN: getDeviceNames response: mode " + mode);
+          if ((mode == "popup") && chaudev.deviceNames.length == 0) {
+            chaudev.log("Starting from firefox 91.0 we cannot enumerate audiooutput devices in options popup until we open options page and ask for mic permissions");
+            chaudev.updateDevicesWithNamesFromPopup();
+            window.close()
+            return;
+          }
           updateDevices();
         }).catch((err) => {
           chaudev.onError(err);

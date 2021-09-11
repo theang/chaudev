@@ -6,6 +6,7 @@ if ("undefined" === typeof(chaudev)) {
     defaultDeviceId: null,
     deviceIds: [],
     lastSetDeviceId: 0,
+    localDeviceNames: [],
 
     filename: "chaudify.js: ",
     debug: true,
@@ -24,17 +25,45 @@ if ("undefined" === typeof(chaudev)) {
       console.error(`${chaudev.filename}: Error: ${error}`);
     },
 
-    enumDevices: function() {
+    enumDevices: async function() {
       return navigator.mediaDevices.enumerateDevices().then(function (devicesEnum) {
         let deviceIds = [];
+        let deviceNames = [];
         devicesEnum.forEach(function(device) {
           chaudev.log("BEGIN: forEach device", device);
           let [kind, type, direction] = device.kind.match(/(\w+)(input|output)/i);
           if (type.match(/audio/i) && direction.match(/output/i)) {
+            chaudev.log();
             deviceIds.push(device.deviceId);
+            let lbl = device.label;
+            if (lbl !== '') {
+              deviceNames.push(lbl);
+            }
           }
         });
+        chaudev.log("device Ids gathered: " + JSON.stringify(deviceIds));
+        if ((deviceNames.length > 0) && ((deviceNames.length != chaudev.localDeviceNames.length) 
+                                       || !chaudev.localDeviceNames.every((value, index) => value === deviceNames[index]))) {
+          chaudev.localDeviceNames = deviceNames;
+        }
+        browser.runtime.sendMessage({command:"setDeviceIds",
+          deviceIds: deviceIds
+        });
+        chaudev.deviceIds = deviceIds;
         return deviceIds;
+      });
+    },
+
+    enumDevicesWithNames: async function() {
+      chaudev.log("BEGIN: updateDevicesWithNames");
+      chaudev.log("BEGIN: updateDevicesWithNames2", window.parent === window);
+      chaudev.log("BEGIN: updateDevicesWithNames3", window.opener === null);
+      return navigator.mediaDevices.getUserMedia({audio:true,video:false}).then(function (stream) {
+        chaudev.log("BEGIN: getUserMedia");
+        return chaudev.enumDevices();
+      }).catch(function (err) {
+        chaudev.log("ERROR: updateDevices", err);
+        return chaudev.enumDevices();
       });
     },
 
@@ -46,12 +75,9 @@ if ("undefined" === typeof(chaudev)) {
         }).then(function(response){
           if ((response.deviceIds) && (response.deviceIds.length > 0)) {
             chaudev.deviceIds = response.deviceIds;
-            browser.runtime.sendMessage({command:"setDeviceIds",
-              deviceIds: chaudev.deviceIds
-            });
             return chaudev.deviceIds;
           } else {
-            return chaudev.enumDevices();
+            return chaudev.enumDevicesWithNames();
           }
         });
       }
@@ -100,14 +126,21 @@ if ("undefined" === typeof(chaudev)) {
         chaudev.log("id to set equals lastSetDeviceId skip setting device id");
       } else {
         chaudev.lastSetDeviceId = id;
-        chaudev.setDeviceIdForNodes(id, avtags);
+        if (avtags.length > 0) {
+          chaudev.setDeviceIdForNodes(id, avtags);
+        }
       }
     },
 
-    onMessage: function(msg) {
+    onMessage: function(msg, sender, sendResponse) {
       chaudev.log("BEGIN: message got: ", msg);
       if (msg.command === "setDeviceId") {
         chaudev.setDeviceId(msg.deviceId);
+      } else if (msg.command === "getDeviceNames") {
+        chaudev.log("getDeviceNames, sending response: " + chaudev.localDeviceNames)
+        sendResponse({command:"getDeviceNamesResponse", deviceNames: chaudev.localDeviceNames});
+      } else {
+        chaudev.log("unknown command ignored")
       }
     },
 
@@ -127,8 +160,8 @@ if ("undefined" === typeof(chaudev)) {
       chaudev.getDeviceIdFromLocalStorage().then(function(deviceId) {
         chaudev.setDeviceId(deviceId);
       });
-      browser.runtime.onMessage.addListener((message) => {
-        chaudev.onMessage(message);
+      browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        chaudev.onMessage(message, sender, sendResponse);
       });
       let observer = new MutationObserver(function(mutations, obs) {
           let nodes = [];

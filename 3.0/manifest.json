@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "3.0.1",
+  "version": "3.0.3",
 
   "description": "__MSG_extensionDesc__",
 
@@ -11,7 +11,7 @@
   "applications": {
   "gecko": {
     "id": "chaudev@roamingquark.info",
-    "strict_min_version": "64.0"
+    "strict_min_version": "91.0"
     }
   },
 

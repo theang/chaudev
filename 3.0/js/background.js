@@ -70,14 +70,24 @@ if ("undefined" === typeof(chaudev)) {
         sendResponse({command:"getDeviceNamesResponse", deviceNames: chaudev.deviceNames});
       } else if (msg.command == "getDeviceIds") {
         if (sender.tab) {
-          sendResponse({command:"getDeviceIdsResponse", deviceIds: chaudev.deviceIds[sender.tab.sessionId]});
+          sendResponse({command:"getDeviceIdsResponse", deviceIds: chaudev.deviceIds[sender.tab.id]});
         } else {
           chaudev.log("getDeviceIds Sender has no tab", sender);
           sendResponse({command:"getDeviceIdsResponse", deviceIds: []});
         }
       } else if (msg.command == "setDeviceIds") {
         if (sender.tab) {
-          chaudev.deviceIds[sender.tab.sessionId] = msg.deviceIds;
+          chaudev.deviceIds[sender.tab.id] = msg.deviceIds;
+          if (chaudev.deviceNames.length == 0) {
+            browser.tabs.sendMessage(
+              sender.tab.id,
+              {command:"getDeviceNames"}
+            ).then(function (response) {
+              chaudev.deviceNames = response.deviceNames;
+            }).catch(function(err) {
+              chaudev.log("Tab send message has error, skipping getting names:" + sender.tab.id, err);
+            });
+          }
         } else {
           chaudev.log("Sender has no tab", sender);
         }
@@ -93,14 +103,23 @@ if ("undefined" === typeof(chaudev)) {
       sessionInfos.forEach(function(sessionInfo) {
         let id = null;
         if (sessionInfo.tab) {
+          chaudev.log("DEBUG: background.js: session info: ", sessionInfo.tab);
           id = sessionInfo.tab.sessionId;
         } else {
           id = sessionInfo.window.sessionId;
         }
+        chaudev.log("DEBUG: background.js: session cleanup: ", id);
         if (id && chaudev.deviceIds[id]) {
           delete chaudev.deviceIds[id];
         }
       });
+    },
+
+    handleTabRemoved: function(tabId, removeInfo) {
+      chaudev.log("DEBUG: background.js: tab removed: ", tabId);
+      if (tabId && chaudev.deviceIds[tabId]) {
+        delete chaudev.deviceIds[tabId];
+      }
     },
 
     sessionChanged: function() {
@@ -118,7 +137,8 @@ if ("undefined" === typeof(chaudev)) {
         chaudev.log("DEBUG: background.js: message received: ", message);
         chaudev.onMessage(message, sender, sendResponse);
       });
-      browser.sessions.onChanged.addListener(chaudev.sessionChanged);
+      browser.tabs.onRemoved.addListener(chaudev.handleTabRemoved);
+      //browser.sessions.onChanged.addListener(chaudev.sessionChanged);
     }
   };
 }
